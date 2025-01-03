@@ -24,6 +24,7 @@ AWQ_CAUSAL_LM_MODEL_MAP = {
     "qwen": QwenAWQForCausalLM,
     "baichuan": BaichuanAWQForCausalLM,
     "llava": LlavaAWQForCausalLM,
+    "molmo": MolmoAWQForCausalLM,
     "qwen2": Qwen2AWQForCausalLM,
     "gemma": GemmaAWQForCausalLM,
     "gemma2": Gemma2AWQForCausalLM,
