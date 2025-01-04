@@ -28,6 +28,7 @@ class MolmoAWQForCausalLM(BaseAWQForCausalLM):
     @staticmethod
     def get_layers_for_scaling(module: "MolmoTextDecoderLayer", input_feat, module_kwargs):
         layers = []
+        print(input_feat.keys())
 
         # attention input
         layers.append(
@@ -59,7 +60,7 @@ class MolmoAWQForCausalLM(BaseAWQForCausalLM):
         layers.append(
             dict(
                 prev_op=module.post_attention_layernorm,
-                layers=[module.mlp.fc1, module.mlp.activation_fn],
+                layers=[module.mlp.fc1],
                 inp=input_feat["mlp.fc1"],
                 module2inspect=module.mlp,
             )
@@ -68,7 +69,7 @@ class MolmoAWQForCausalLM(BaseAWQForCausalLM):
         # linear 2
         layers.append(
             dict(
-                prev_op=module.mlp.activation_fn,
+                prev_op=module.mlp.fc1,
                 layers=[module.mlp.fc2],
                 inp=input_feat["mlp.fc2"],
             )
